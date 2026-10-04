@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:apk_giphy/model/super_hero.dart';
 
-/// Erro com mensagem já pronta para mostrar ao usuário.
 class HeroException implements Exception {
   final String message;
   HeroException(this.message);
@@ -15,11 +13,9 @@ class HeroException implements Exception {
 }
 
 class HeroService {
-  // TODO: cole aqui o seu token gerado em https://superheroapi.com
   static const String _token = 'eceb199183bacb5945b3960f2bf5f48e';
   static const String _baseUrl = 'https://superheroapi.com/api';
 
-  /// Busca heróis pelo nome (a API só entende nomes em inglês).
   Future<List<SuperHero>> buscarPorNome(String nome) async {
     final dados = await _get('search/${Uri.encodeComponent(nome)}');
     _verificarErro(dados, 'Nenhum herói encontrado para "$nome".');
@@ -33,14 +29,12 @@ class HeroService {
         .toList();
   }
 
-  /// Busca um herói pelo ID (de 1 a 731).
   Future<SuperHero> buscarPorId(int id) async {
     final dados = await _get('$id');
     _verificarErro(dados, 'Herói não encontrado.');
     return SuperHero.fromJson(dados);
   }
 
-  /// A API responde 200 mesmo com erro; o aviso vem em {"response": "error"}.
   void _verificarErro(Map<String, dynamic> dados, String msgNaoEncontrado) {
     if (dados['response'] != 'error') return;
 

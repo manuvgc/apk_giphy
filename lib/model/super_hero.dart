@@ -1,7 +1,3 @@
-/// Modelo que representa um personagem retornado pela SuperHero API.
-///
-/// Obs.: o nome da classe é SuperHero (e não Hero) para não conflitar
-/// com o widget `Hero` que já existe no Flutter.
 class SuperHero {
   final String id;
   final String name;
@@ -14,7 +10,6 @@ class SuperHero {
   final String firstAppearance;
   final String imageUrl;
 
-  /// Valores de 0 a 100. Fica null quando a API não tem o dado ("null").
   final Map<String, int?> powerstats;
 
   SuperHero({
@@ -31,7 +26,6 @@ class SuperHero {
     required this.powerstats,
   });
 
-  /// Cria um SuperHero a partir do JSON da API.
   factory SuperHero.fromJson(Map<String, dynamic> json) {
     final bio = _map(json['biography']);
     final appearance = _map(json['appearance']);
@@ -66,11 +60,9 @@ class SuperHero {
   }
 }
 
-/// Garante que o valor é um Map (a API às vezes devolve campos faltando).
 Map<String, dynamic> _map(dynamic valor) =>
     valor is Map<String, dynamic> ? valor : <String, dynamic>{};
 
-/// A API devolve a string "null" ou "-" quando não tem a informação.
 String _texto(dynamic valor) {
   final t = valor?.toString().trim() ?? '';
   if (t.isEmpty || t == 'null' || t == '-') return 'Não informado';

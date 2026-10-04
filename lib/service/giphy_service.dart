@@ -15,11 +15,10 @@ class GiphyService {
         'bundle': 'messaging_non_clips',
       });
     } else {
-      // Uri.https já codifica espaços e caracteres especiais do termo
       uri = Uri.https('api.giphy.com', '/v1/gifs/search', {
         'api_key': _key,
         'q': search,
-        'limit': '25', // antes estava "limit25" (faltava o "=")
+        'limit': '25',
         'offset': '$offset',
         'lang': 'en',
         'bundle': 'messaging_non_clips',

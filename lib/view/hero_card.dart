@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:apk_giphy/model/super_hero.dart';
 
-/// Cartão com foto, informações e barras de poder de um herói.
 class HeroCard extends StatelessWidget {
   final SuperHero heroi;
   const HeroCard({super.key, required this.heroi});
